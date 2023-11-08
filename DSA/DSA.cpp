@@ -2,10 +2,39 @@
 //
 
 #include <iostream>
+#include "DataStructures/LinkedList.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    LinkedList<int> IntLinkedList;
+
+    IntLinkedList.Add(1);
+    IntLinkedList.Add(2);
+    IntLinkedList.Add(3);
+
+    IntLinkedList.Print();
+    std::cin.get();
+
+    IntLinkedList.Insert(0, 0);
+    IntLinkedList.Insert(1, 1);
+    IntLinkedList.Insert(4, 5);
+
+    IntLinkedList.Print();
+    std::cin.get();
+
+    IntLinkedList.Remove(0);
+    IntLinkedList.Print();
+    std::cin.get();
+    
+    IntLinkedList.Remove(3);
+    IntLinkedList.Print();
+    std::cin.get();
+
+    IntLinkedList.Remove(IntLinkedList.Count() - 1);
+    IntLinkedList.Print();
+    std::cin.get();
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
