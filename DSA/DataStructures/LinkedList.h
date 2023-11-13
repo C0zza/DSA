@@ -141,7 +141,7 @@ public:
 
 	void ReverseRecursively()
 	{
-		Start = ReverseRecursively(Start, nullptr);
+		ReverseRecursively(Start, nullptr);
 	}
 
 	int Count() { return Size; }
@@ -188,16 +188,16 @@ private:
 		return IndexNode;
 	}
 
-	LinkedListNode* ReverseRecursively(LinkedListNode* Current, LinkedListNode* Previous)
+	void ReverseRecursively(LinkedListNode* Current, LinkedListNode* Previous)
 	{
 		if (!Current)
 		{
-			return Previous;
+			Start = Previous;
+			return;
 		}
 
-		LinkedListNode* NewStart = ReverseRecursively(Current->Next, Current);
+		ReverseRecursively(Current->Next, Current);
 		Current->Next = Previous;
-		return NewStart;
 	}
 
 	LinkedListNode* Start = nullptr;
