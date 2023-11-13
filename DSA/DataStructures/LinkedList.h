@@ -122,6 +122,28 @@ public:
 		Size--;
 	}
 
+	void ReverseIteratively()
+	{
+		LinkedListNode* Current = Start;
+		LinkedListNode* Prev = nullptr;
+		LinkedListNode* Next = nullptr;
+
+		while (Current)
+		{
+			Next = Current->Next;
+			Current->Next = Prev;
+			Prev = Current;
+			Current = Next;
+		}
+
+		Start = Prev;
+	}
+
+	void ReverseRecursively()
+	{
+		Start = ReverseRecursively(Start, nullptr);
+	}
+
 	int Count() { return Size; }
 
 	void Print()
@@ -150,8 +172,6 @@ private:
 		}
 	};
 
-	LinkedListNode* Start = nullptr;
-
 	LinkedListNode* GetIndex(const int Index)
 	{
 		if (!IsValidIndex(Index))
@@ -167,6 +187,20 @@ private:
 
 		return IndexNode;
 	}
+
+	LinkedListNode* ReverseRecursively(LinkedListNode* Current, LinkedListNode* Previous)
+	{
+		if (!Current)
+		{
+			return Previous;
+		}
+
+		LinkedListNode* NewStart = ReverseRecursively(Current->Next, Current);
+		Current->Next = Previous;
+		return NewStart;
+	}
+
+	LinkedListNode* Start = nullptr;
 
 	bool IsValidIndex(const int Index) { return Index < Count()  && Index >= 0; }
 };

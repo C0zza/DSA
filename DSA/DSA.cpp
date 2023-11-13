@@ -22,7 +22,15 @@ int main()
     IntLinkedList.Print();
     std::cin.get();
 
-    IntLinkedList.Remove(0);
+    IntLinkedList.ReverseRecursively();
+    IntLinkedList.Print();
+    std::cin.get();
+
+    IntLinkedList.ReverseRecursively();
+    IntLinkedList.Print();
+    std::cin.get();
+
+    /*IntLinkedList.Remove(0);
     IntLinkedList.Print();
     std::cin.get();
     
@@ -32,7 +40,7 @@ int main()
 
     IntLinkedList.Remove(IntLinkedList.Count() - 1);
     IntLinkedList.Print();
-    std::cin.get();
+    std::cin.get();*/
 
     return 0;
 }
