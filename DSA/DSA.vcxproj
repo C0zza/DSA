@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataStructures\DoublyLinkedList.cpp" />
     <ClCompile Include="DSA.cpp" />
     <ClCompile Include="DataStructures\HashMap.cpp" />
     <ClCompile Include="DataStructures\LinkedList.cpp" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="DataStructures\HashMap.h" />
     <ClInclude Include="DataStructures\LinkedList.h" />
+    <ClInclude Include="DataStructures\DoublyLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
