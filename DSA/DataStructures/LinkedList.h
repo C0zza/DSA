@@ -7,11 +7,22 @@ template<typename T>
 class LinkedList
 {
 public:
+	~LinkedList()
+	{
+		Node* Current = Start;
+		while (Current)
+		{
+			Node* Next = Current->Next;
+			delete Current;
+			Current = Next;
+		}
+	}
+
 	void Add(const T& Value)
 	{
-		LinkedListNode* NextNode = Start;
+		Node* NextNode = Start;
 
-		NextNode = new LinkedListNode();
+		NextNode = new Node();
 		NextNode->Data = Value;
 
 		if (!Size)
@@ -20,7 +31,7 @@ public:
 		}
 		else
 		{
-			LinkedListNode* LastNode = GetIndex(Count() - 1);
+			Node* LastNode = GetIndex(Count() - 1);
 			assert(LastNode);
 			LastNode->Next = NextNode;
 		}
@@ -46,12 +57,12 @@ public:
 		case 0:
 			if (!Start)
 			{
-				Start = new LinkedListNode();
+				Start = new Node();
 				Start->Data = Value;
 			}
 			else
 			{
-				LinkedListNode* InsertedNode = new LinkedListNode();
+				Node* InsertedNode = new Node();
 				InsertedNode->Next = Start;
 				InsertedNode->Data = Value;
 				Start = InsertedNode;
@@ -59,10 +70,10 @@ public:
 
 			break;
 		default:
-			LinkedListNode* IndexNode = GetIndex(Index - 1);
+			Node* IndexNode = GetIndex(Index - 1);
 			assert(IndexNode);
 
-			LinkedListNode* InsertedNode = new LinkedListNode();
+			Node* InsertedNode = new Node();
 			InsertedNode->Data = Value;
 
 			InsertedNode->Next = IndexNode->Next;
@@ -83,7 +94,7 @@ public:
 
 		if (Index == Count() - 1)
 		{
-			LinkedListNode* SecondLastNode = GetIndex(Index - 1);
+			Node* SecondLastNode = GetIndex(Index - 1);
 			assert(SecondLastNode);
 
 			SecondLastNode->Next->Next = nullptr;
@@ -92,7 +103,7 @@ public:
 			return;
 		}
 
-		LinkedListNode* NewStart = Start->Next;
+		Node* NewStart = Start->Next;
 		assert(NewStart);
 		switch (Index)
 		{
@@ -104,10 +115,10 @@ public:
 			break;
 		default:
 
-			LinkedListNode* OneBeforeIndex = GetIndex(Index - 1);
+			Node* OneBeforeIndex = GetIndex(Index - 1);
 			assert(OneBeforeIndex);
 
-			LinkedListNode* RemovedNode = OneBeforeIndex->Next;
+			Node* RemovedNode = OneBeforeIndex->Next;
 			assert(RemovedNode);
 
 			OneBeforeIndex->Next = RemovedNode->Next;
@@ -124,9 +135,9 @@ public:
 
 	void ReverseIteratively()
 	{
-		LinkedListNode* Current = Start;
-		LinkedListNode* Prev = nullptr;
-		LinkedListNode* Next = nullptr;
+		Node* Current = Start;
+		Node* Prev = nullptr;
+		Node* Next = nullptr;
 
 		while (Current)
 		{
@@ -148,7 +159,7 @@ public:
 
 	void Print()
 	{
-		LinkedListNode* CurrentNode = Start;
+		Node* CurrentNode = Start;
 		while (CurrentNode)
 		{
 			CurrentNode->Print();
@@ -160,10 +171,10 @@ public:
 private:
 	int Size = 0;
 
-	class LinkedListNode
+	class Node
 	{
 	public:
-		LinkedListNode* Next = nullptr;
+		Node* Next = nullptr;
 		T Data;
 
 		void Print()
@@ -172,14 +183,14 @@ private:
 		}
 	};
 
-	LinkedListNode* GetIndex(const int Index)
+	Node* GetIndex(const int Index)
 	{
 		if (!IsValidIndex(Index))
 		{
 			return nullptr;
 		}
 
-		LinkedListNode* IndexNode = Start;
+		Node* IndexNode = Start;
 		for (int i = 0; i < Index; i++)
 		{
 			IndexNode = IndexNode->Next;
@@ -188,7 +199,7 @@ private:
 		return IndexNode;
 	}
 
-	void ReverseRecursively(LinkedListNode* Current, LinkedListNode* Previous)
+	void ReverseRecursively(Node* Current, Node* Previous)
 	{
 		if (!Current)
 		{
@@ -200,7 +211,7 @@ private:
 		Current->Next = Previous;
 	}
 
-	LinkedListNode* Start = nullptr;
+	Node* Start = nullptr;
 
 	bool IsValidIndex(const int Index) { return Index < Count()  && Index >= 0; }
 };
